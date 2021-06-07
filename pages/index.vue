@@ -1,5 +1,7 @@
 <template>
     <div class="blueposts">
+        <div class="button" @click="hello()">click me</div>
+        {{ this.counter }}
         <input class="input is-large" type="text" placeholder="Search a keyword" v-model="searchString">
         <template
             v-for="bluepost in filteredBlueposts">
@@ -18,6 +20,9 @@
 <script>
 export default {
   methods: {
+    hello () {
+      this.counter += 1
+    },
     filterByValue (searchString) {
       searchString = searchString.toLowerCase()
       return this.blueposts.filter((post) => {
@@ -47,6 +52,7 @@ export default {
   },
   data () {
     return {
+      counter: 0,
       searchString: ''
     }
   },
