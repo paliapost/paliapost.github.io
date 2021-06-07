@@ -16,11 +16,6 @@
 
 <script>
   export default {
-    data() {
-      return {
-        blueposts: []
-      }
-    },
     async asyncData({ $content, params }) {
       const blueposts = await $content('blueposts', params.slug).fetch()
       
