@@ -35,7 +35,7 @@ export default {
           }
         }
 
-        if (post.type === 'qna') {
+        if (post.type === 'statement') {
           if (post.statement.content.toLowerCase().includes(searchString)) {
             return true
           }
