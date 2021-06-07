@@ -20,16 +20,23 @@ export default {
   methods: {
     filterByValue (searchString) {
       searchString = searchString.toLowerCase()
-      return this.blueposts.filter(post => {
-        if (post.type == "qna") {
-          if (post.question.content.toLowerCase().includes(searchString))
+      return this.blueposts.filter((post) => {
+        if (post.type === 'qna') {
+          if (post.question.content.toLowerCase().includes(searchString)) {
             return true
-          if (post.answer.content.toLowerCase().includes(searchString))
+          }
+          if (post.answer.content.toLowerCase().includes(searchString)) {
             return true
-        } else {
-          if (post.statement.content.toLowerCase().includes(searchString))
-            return true
+          }
         }
+
+        if (post.type === 'qna') {
+          if (post.statement.content.toLowerCase().includes(searchString)) {
+            return true
+          }
+        }
+
+        return false
       })
     }
   },
@@ -38,14 +45,14 @@ export default {
 
     return { blueposts }
   },
-  data() {
+  data () {
     return {
-      searchString: '',
+      searchString: ''
     }
   },
   computed: {
     filteredBlueposts () {
-      if (this.searchString != '') {
+      if (this.searchString !== '') {
         return this.filterByValue(this.searchString)
       } else {
         return this.blueposts
