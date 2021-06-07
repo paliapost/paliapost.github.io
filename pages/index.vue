@@ -15,12 +15,11 @@
 </template>
 
 <script>
-  export default {
-    async asyncData({ $content, params }) {
-      const blueposts = await $content('blueposts', params.slug).fetch()
-      
-      return { blueposts }
-    }
+export default {
+  async asyncData({ $content, params }) {
+    const blueposts = await $content('blueposts', params.slug).fetch()
+    
+    return { blueposts }
   }
+}
 </script>
-
