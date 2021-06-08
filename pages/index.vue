@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     filteredBlueposts () {
-        return this.filterByValue(this.searchString)
+      return this.filterByValue(this.searchString)
     }
   }
 }
