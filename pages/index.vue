@@ -1,17 +1,18 @@
 <template>
     <div class="blueposts">
-        <div class="button" @click="hello()">click me</div>
-        {{ this.counter }}
-        <input class="input is-large" type="text" placeholder="Search a keyword" v-model="searchString">
+        <input class="input is-large block" type="text" placeholder="Search a keyword" v-model="searchString">
         <template
             v-for="(bluepost, index) in filteredBlueposts">
 
-            <div v-if="bluepost.type == 'qna'" class="block" :key="bluepost.question.id + index">
-                <div class="is-size-3 question">Q: {{ bluepost.question.content }}</div>
-                <div class="is-size-4 answer">A: {{ bluepost.answer.content }}</div>
+            <div v-if="bluepost.type == 'qna'" class="content block" :key="bluepost.question.id + index">
+                <blockquote class="is-size-4 question">{{ bluepost.question.content }}</blockquote>
+                <div class="is-size-4 answer">
+                  <span class="tag is-info">Dev:</span>
+                  {{ bluepost.answer.content }}
+                </div>
             </div>
             <div v-if="bluepost.type == 'statement'" class="block" :key="bluepost.statement.id + index">
-              <div class="is-size-3 question">{{ bluepost.statement.content }}</div>
+              <div class="is-size-4 question">{{ bluepost.statement.content }}</div>
             </div>
         </template>
     </div>
@@ -20,9 +21,6 @@
 <script>
 export default {
   methods: {
-    hello () {
-      this.counter += 1
-    },
     filterByValue (searchString) {
       searchString = searchString.toLowerCase()
       return this.blueposts.filter((post) => {
@@ -52,7 +50,6 @@ export default {
   },
   data () {
     return {
-      counter: 0,
       searchString: ''
     }
   },
