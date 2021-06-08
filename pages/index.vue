@@ -4,13 +4,13 @@
         {{ this.counter }}
         <input class="input is-large" type="text" placeholder="Search a keyword" v-model="searchString">
         <template
-            v-for="bluepost in filteredBlueposts">
+            v-for="(bluepost, index) in filteredBlueposts">
 
-            <div v-if="bluepost.type == 'qna'" class="block" :key=bluepost.question.id>
+            <div v-if="bluepost.type == 'qna'" class="block" :key="bluepost.question.id + index">
                 <div class="is-size-3 question">Q: {{ bluepost.question.content }}</div>
                 <div class="is-size-4 answer">A: {{ bluepost.answer.content }}</div>
             </div>
-            <div v-if="bluepost.type == 'statement'" class="block" :key=bluepost.statement.id>
+            <div v-if="bluepost.type == 'statement'" class="block" :key="bluepost.statement.id + index">
               <div class="is-size-3 question">{{ bluepost.statement.content }}</div>
             </div>
         </template>
@@ -58,11 +58,7 @@ export default {
   },
   computed: {
     filteredBlueposts () {
-      if (this.searchString !== '') {
         return this.filterByValue(this.searchString)
-      } else {
-        return this.blueposts
-      }
     }
   }
 }
