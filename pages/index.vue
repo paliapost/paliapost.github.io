@@ -5,9 +5,9 @@
             v-for="(bluepost, index) in filteredBlueposts">
 
             <div v-if="bluepost.type == 'qna'" class="content block" :key="bluepost.messages[0].id + index">
-                <template v-for="(message, index) in bluepost.messages">
+                <template v-for="(message, idx) in bluepost.messages">
                   <!-- Dev answer -->
-                  <div v-if="index == bluepost.messages.length - 1" :key="bluepost.messages[0].id + index" class="is-size-4 answer">
+                  <div v-if="idx == bluepost.messages.length - 1" :key="bluepost.messages[0].id + idx" class="is-size-4 answer">
                     <div>
                       <span class="has-text-link">
                         {{ message.author.username }}:
@@ -20,7 +20,7 @@
                     </div>
                   </div>
                   <!-- Message Chain -->
-                  <div v-else :key="bluepost.messages[0].id + index" class="is-size-4 question">
+                  <div v-else :key="bluepost.messages[0].id + idx" class="is-size-4 question">
                       <div>
                         <span class="has-text-success">
                           {{ message.author.username }}:
@@ -57,7 +57,7 @@ export default {
       return this.blueposts.filter((bluepost) => {
         if (bluepost.type === 'qna') {
           // Q&A: Loop over all messages
-          return bluepost.messages.filter((message) => {
+          return bluepost.messages.some((message) => {
             if (message.content.toLowerCase().includes(searchString)) {
               console.log('A')
               return true
@@ -77,7 +77,7 @@ export default {
     }
   },
   async asyncData ({ $content, params }) {
-    const blueposts = await $content('blueposts', params.slug).fetch()
+    const blueposts = await $content('blueposts').fetch()
 
     return { blueposts }
   },
