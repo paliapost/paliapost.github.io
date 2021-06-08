@@ -76,7 +76,7 @@ export default {
       })
     }
   },
-  async asyncData ({ $content, params }) {
+  async asyncData ({ $content }) {
     const blueposts = await $content('blueposts').fetch()
 
     return { blueposts }
