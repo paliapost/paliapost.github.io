@@ -4,15 +4,43 @@
         <template
             v-for="(bluepost, index) in filteredBlueposts">
 
-            <div v-if="bluepost.type == 'qna'" class="content block" :key="bluepost.question.id + index">
-                <blockquote class="is-size-4 question">{{ bluepost.question.content }}</blockquote>
-                <div class="is-size-4 answer">
-                  <span class="tag is-info">Dev:</span>
-                  {{ bluepost.answer.content }}
-                </div>
+            <div v-if="bluepost.type == 'qna'" class="content block" :key="bluepost.messages[0].id + index">
+                <template v-for="(message, index) in bluepost.messages">
+                  <!-- Dev answer -->
+                  <div v-if="index == bluepost.messages.length - 1" :key="bluepost.messages[0].id + index" class="is-size-4 answer">
+                    <div>
+                      <span class="has-text-link">
+                        {{ message.author.username }}:
+                      </span>
+                    </div>
+                    <div>
+                      <span>
+                        {{ message.content }}
+                      </span>
+                    </div>
+                  </div>
+                  <!-- Message Chain -->
+                  <div v-else :key="bluepost.messages[0].id + index" class="is-size-4 question">
+                      <div>
+                        <span class="has-text-success">
+                          {{ message.author.username }}:
+                        </span>
+                      </div>
+                      <div><span>{{ message.content }}</span></div>
+                  </div>
+                </template>
             </div>
-            <div v-if="bluepost.type == 'statement'" class="block" :key="bluepost.statement.id + index">
-              <div class="is-size-4 question">{{ bluepost.statement.content }}</div>
+
+            <!-- ANSWER -->
+            <div v-if="bluepost.type == 'statement'" class="block" :key="bluepost.message.id + index">
+              <div class="is-size-4 question">
+                  <span class="has-text-link">
+                    {{ bluepost.message.author.username }}:
+                  </span>
+                  <span>
+                    {{ bluepost.message.content }}
+                  </span>
+              </div>
             </div>
         </template>
     </div>
@@ -22,24 +50,29 @@
 export default {
   methods: {
     filterByValue (searchString) {
+      // Get search string
       searchString = searchString.toLowerCase()
-      return this.blueposts.filter((post) => {
-        if (post.type === 'qna') {
-          if (post.question.content.toLowerCase().includes(searchString)) {
-            return true
-          }
-          if (post.answer.content.toLowerCase().includes(searchString)) {
-            return true
-          }
+
+      // Loop over all blueposts files
+      return this.blueposts.filter((bluepost) => {
+        if (bluepost.type === 'qna') {
+          // Q&A: Loop over all messages
+          return bluepost.messages.filter((message) => {
+            if (message.content.toLowerCase().includes(searchString)) {
+              console.log('A')
+              return true
+            }
+
+            return false
+          })
         }
 
-        if (post.type === 'statement') {
-          if (post.statement.content.toLowerCase().includes(searchString)) {
-            return true
-          }
+        // Statement: Check single message
+        if (bluepost.message.content.toLowerCase().includes(searchString)) {
+          return true
+        } else {
+          return false
         }
-
-        return false
       })
     }
   },

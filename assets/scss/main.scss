@@ -6,9 +6,14 @@
   src: url('~assets/fonts/civitype-fg.regular.ttf') format('truetype');
 }
 
+$navbar-background-color: transparent;
+$navbar-item-hover-background-color: transparent;
+$navbar-tab-hover-border-bottom-color: white;
+$navbar-item-hover-color: white;
+$navbar-item-color: black;
+$navbar-burger-color: white; 
 // Import bulma styles
 @import "~bulma";
-
 // Import buefy styles
 @import "~buefy/src/scss/buefy";
 
@@ -19,6 +24,62 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+// Navigation
+a.navbar-item {
+  font-family: 'Civitype FG', cursive;
+}
+
+.navbar-burger {
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+/*
+.navbar {
+  background-color: transparent;
+}
+
+.burger-menu {
+  background-color: white;
+  border-radius: 5px;
+}
+
+a.navbar-item {
+  color: black;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0px 5px;
+  padding-bottom: 3px;
+}
+*/
+/*
+div.navbar-menu.is-active a.navbar-item:hover {
+  background-color: transparent;
+  color: black;
+  padding-bottom: 0px;
+  border-bottom: 3px solid green;
+}
+*/
+/*
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active {
+  background-color: transparent;
+}
+
+a.navbar-item:hover {
+  background-color: transparent;
+  color: black;
+  padding-bottom: 0px;
+  border-bottom: 3px solid white;
+}
+*/
 
 p.title {
   font-family: 'Civitype FG', cursive;
