@@ -42,7 +42,8 @@ export default {
     ['nuxt-buefy', { css: false }],
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    'vue-plausible'
   ],
 
   buefy: {
@@ -57,6 +58,9 @@ export default {
         icons: ['fas']
       }
     ]
+  },
+  plausible: {
+    domain: 'paliapost.com'
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content

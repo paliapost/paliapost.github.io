@@ -21,7 +21,8 @@
     "nuxt-buefy": "^0.4.4",
     "nuxt-fontawesome": "^0.4.0",
     "sass": "^1.34.1",
-    "sass-loader": "^10.1.1"
+    "sass-loader": "^10.1.1",
+    "vue-plausible": "^1.1.4"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",
