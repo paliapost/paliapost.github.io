@@ -12,7 +12,7 @@
                 <span>&#8226;</span> This is an unofficial site.
             </p>
             <p class="is-size-4 is-size-5-mobile">
-                <span>&#8226;</span> This is unoptimized.
+                <span>&#8226;</span> This is site is unoptimized and untested!
             </p>
       </b-notification>
       <a href="/">
