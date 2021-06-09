@@ -5,11 +5,14 @@
             has-icon
             aria-close-label="Close notification"
             role="alert">
-            <p class="is-size-2 is-size-5-mobile">
+            <p class="is-size-4 is-size-5-mobile">
                 <span>&#8226;</span> This site is under slow but heavy construction.
             </p>
-            <p class="is-size-2 is-size-5-mobile">
+            <p class="is-size-4 is-size-5-mobile">
                 <span>&#8226;</span> This is an unofficial site.
+            </p>
+            <p class="is-size-4 is-size-5-mobile">
+                <span>&#8226;</span> This is unoptimized.
             </p>
       </b-notification>
       <a href="/">

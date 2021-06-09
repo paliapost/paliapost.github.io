@@ -1,6 +1,10 @@
 <template>
     <div class="blueposts">
-        <input class="input is-large block" type="text" placeholder="Search a keyword" v-model="searchString">
+        <input
+          class="input is-large block"
+          type="text"
+          placeholder="Search a keyword"
+          v-model="searchString">
         <template
             v-for="(bluepost, index) in filteredBlueposts">
 
@@ -14,7 +18,8 @@
                       </span>
                     </div>
                     <div>
-                      <span>
+                      <span
+                      v-html="$options.filters.highlight(message.content, searchString)">
                         {{ message.content }}
                       </span>
                     </div>
@@ -26,7 +31,12 @@
                           {{ message.author.username }}:
                         </span>
                       </div>
-                      <div><span>{{ message.content }}</span></div>
+                      <div>
+                        <span
+                        v-html="$options.filters.highlight(message.content, searchString)">
+                        {{ message.content }}
+                        </span>
+                      </div>
                   </div>
                 </template>
             </div>
@@ -37,7 +47,8 @@
                   <span class="has-text-link">
                     {{ bluepost.message.author.username }}:
                   </span>
-                  <span>
+                  <span
+                      v-html="$options.filters.highlight(bluepost.message.content, searchString)">
                     {{ bluepost.message.content }}
                   </span>
               </div>
@@ -49,9 +60,9 @@
 <script>
 export default {
   methods: {
-    filterByValue (searchString) {
+    filterByValue () {
       // Get search string
-      searchString = searchString.toLowerCase()
+      const searchString = this.searchString.toLowerCase()
 
       // Loop over all blueposts files
       return this.blueposts.filter((bluepost) => {
@@ -59,7 +70,6 @@ export default {
           // Q&A: Loop over all messages
           return bluepost.messages.some((message) => {
             if (message.content.toLowerCase().includes(searchString)) {
-              console.log('A')
               return true
             }
 
@@ -77,18 +87,27 @@ export default {
     }
   },
   async asyncData ({ $content }) {
-    const blueposts = await $content('blueposts').fetch()
+    const filteredBlueposts = await $content('blueposts').fetch()
 
-    return { blueposts }
+    return { filteredBlueposts }
   },
   data () {
     return {
+      blueposts: [],
       searchString: ''
     }
   },
-  computed: {
-    filteredBlueposts () {
-      return this.filterByValue(this.searchString)
+  watch: {
+    searchString () {
+      if (this.blueposts.length === 0) {
+        this.blueposts = this.filteredBlueposts
+      }
+      this.filteredBlueposts = this.filterByValue()
+    }
+  },
+  filters: {
+    highlight (text, query) {
+      return text.replace(new RegExp(query, 'gi'), '<span class="has-text-primary">$&</span>')
     }
   }
 }
