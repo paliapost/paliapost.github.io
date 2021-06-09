@@ -30,6 +30,9 @@
               <b-navbar-item tag="nuxt-link" to="/contact" class=is-size-1>
                   Contact
               </b-navbar-item>
+              <b-navbar-item tag="nuxt-link" to="/credits" class=is-size-1>
+                  Credits 
+              </b-navbar-item>
           </template>
       </b-navbar>
       </div>
