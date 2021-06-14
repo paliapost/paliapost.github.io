@@ -6,7 +6,7 @@
           placeholder="Search a keyword"
           v-model="searchString">
         <template
-            v-for="(bluepost, index) in filteredBlueposts">
+            v-for="(bluepost, index) in filteredBlueposts.slice(20)">
 
             <div v-if="bluepost.type == 'qna'" class="content block" :key="bluepost.messages[0].id + index">
                 <template v-for="(message, idx) in bluepost.messages">
